@@ -1,0 +1,70 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Naiomi\\Documents\\Visual Studio 2022\\CSE445\\Green Footprint Stateful\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1FF24A13-3EB0-4901-95E7-FD3A971E8E09}|Green Footprint Stateful.csproj|c:\\users\\naiomi\\documents\\visual studio 2022\\cse445\\green footprint stateful\\webform1.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{1FF24A13-3EB0-4901-95E7-FD3A971E8E09}|Green Footprint Stateful.csproj|solutionrelative:webform1.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FF24A13-3EB0-4901-95E7-FD3A971E8E09}|Green Footprint Stateful.csproj|c:\\users\\naiomi\\documents\\visual studio 2022\\cse445\\green footprint stateful\\greenfootprint.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1FF24A13-3EB0-4901-95E7-FD3A971E8E09}|Green Footprint Stateful.csproj|solutionrelative:greenfootprint.asmx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1FF24A13-3EB0-4901-95E7-FD3A971E8E09}|Green Footprint Stateful.csproj|C:\\Users\\Naiomi\\Documents\\Visual Studio 2022\\CSE445\\Green Footprint Stateful\\greenfootprint.asmx||{FB9167C9-D3B8-4EDA-8083-9AF6B6F6DA62}",
+      "RelativeMoniker": "D:0:0:{1FF24A13-3EB0-4901-95E7-FD3A971E8E09}|Green Footprint Stateful.csproj|solutionrelative:greenfootprint.asmx||{FB9167C9-D3B8-4EDA-8083-9AF6B6F6DA62}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WebForm1.aspx",
+              "DocumentMoniker": "C:\\Users\\Naiomi\\Documents\\Visual Studio 2022\\CSE445\\Green Footprint Stateful\\WebForm1.aspx",
+              "RelativeDocumentMoniker": "WebForm1.aspx",
+              "ToolTip": "C:\\Users\\Naiomi\\Documents\\Visual Studio 2022\\CSE445\\Green Footprint Stateful\\WebForm1.aspx",
+              "RelativeToolTip": "WebForm1.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-03-18T04:29:00.562Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GreenFootprint.asmx",
+              "DocumentMoniker": "C:\\Users\\Naiomi\\Documents\\Visual Studio 2022\\CSE445\\Green Footprint Stateful\\GreenFootprint.asmx",
+              "RelativeDocumentMoniker": "GreenFootprint.asmx",
+              "ToolTip": "C:\\Users\\Naiomi\\Documents\\Visual Studio 2022\\CSE445\\Green Footprint Stateful\\GreenFootprint.asmx",
+              "RelativeToolTip": "GreenFootprint.asmx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003504|",
+              "WhenOpened": "2026-03-18T03:33:55.359Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GreenFootprint.asmx.cs",
+              "DocumentMoniker": "C:\\Users\\Naiomi\\Documents\\Visual Studio 2022\\CSE445\\Green Footprint Stateful\\GreenFootprint.asmx.cs",
+              "RelativeDocumentMoniker": "GreenFootprint.asmx.cs",
+              "ToolTip": "C:\\Users\\Naiomi\\Documents\\Visual Studio 2022\\CSE445\\Green Footprint Stateful\\GreenFootprint.asmx.cs",
+              "RelativeToolTip": "GreenFootprint.asmx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T02:58:28.692Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

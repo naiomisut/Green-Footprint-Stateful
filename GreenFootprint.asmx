@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="GreenFootprint.asmx.cs" Class="Green_Footprint_Stateful.GreenFootprintService" %>
