@@ -55,12 +55,30 @@ namespace YourNamespace
 
         protected void btnGetWeather_Click(object sender, EventArgs e)
         {
+            // Get the zipcode from the textbox and remove extra spaces
             string zip = txtWeatherZip.Text.Trim();
 
-            txtWeatherOutput.Text =
-                "Calling: http://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php\n" +
-                "Input zipcode: " + zip + "\n" +
-                "Expected Output";
+            //txtWeatherOutput.Text =
+            //    "Calling: http://graphical.weather.gov/xml/SOAP_server/ndfdXMLserver.php\n" +
+            //    "Input zipcode: " + zip + "\n" +
+            //    "Expected Output";
+
+            try
+            {
+                // Create a client object to talk to the SOAP weather service
+                WeatherService.ndfdXMLPortTypeCLient client = new WeatherService.ndfdXMLPortTypeClient();
+
+                // Call the service method using the zipcode; should return data from the weather API
+                var = result = client.LatLonListZipCode(zip);
+
+                // Display the result in the textbox
+                txtWeatherOutput.Text = "Zip: " + zip + "\n" + "Weather Service Response:\n" + result;
+            }
+            catch(Exception ex)
+            {
+                // When something foes wrong we catch it and throw an error instead of crashing
+                txtWeatherOutput.Text = "Error" + ex.Message;
+            }
         }
 
         // Soil Data Service – for now, just echo the URL and input so it compiles
@@ -69,10 +87,21 @@ namespace YourNamespace
         {
             string query = txtSoilQuery.Text.Trim();
 
-            txtSoilOutput.Text =
-                "Calling: https://sdmdataaccess.nrcs.usda.gov/\n" +
-                "Input query: " + query + "\n" +
-                "Expected Output";
+            //txtSoilOutput.Text =
+            //    "Calling: https://sdmdataaccess.nrcs.usda.gov/\n" +
+            //    "Input query: " + query + "\n" +
+            //    "Expected Output";
+
+            try
+            {
+                //finish this
+            }
+            catch
+            {
+                //Handle errors safely
+                txtSoilOutput.Text = "Error: " + ex.Message;
+            }
+            
         }
     }
 }
