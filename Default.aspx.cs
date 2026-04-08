@@ -85,6 +85,7 @@ namespace YourNamespace
 
         protected void btnGetSoil_Click(object sender, EventArgs e)
         {
+            // Get user input (our query)
             string query = txtSoilQuery.Text.Trim();
 
             //txtSoilOutput.Text =
@@ -94,7 +95,20 @@ namespace YourNamespace
 
             try
             {
-                //finish this
+                // Need to create an HTTP client to call the REST API
+                string url = "https://sdmdataaccess.nrcs.usda.gov/Tabular/post.rest";
+
+                // Query must convert to HTTP content (need to send to API)
+                var content = new System.Net.Http.StringContent(query);
+
+                // Then send a POST request to the API
+                var response = await client.PostAsync(url, content);
+
+                // Next READ the response returned from the API
+                string result = await response.Content.ReadAsStringAsync();
+
+                // Lastly DISPLAY the result
+                txt.SoilOutput.Text = "QueryL " + query + "\n\n" + "Soil Data Response:\n" + result;
             }
             catch
             {
