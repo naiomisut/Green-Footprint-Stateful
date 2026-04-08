@@ -52,10 +52,14 @@ public class GreenFootprintService: WebService
         foreach (var u in data.users)
         {
             if (u.username == username)
+            {
                 return false;
+            }
         }
 
-        data.users.Add(new User { username = username, score = 0 });
+        string hash = HashGen.MakeHash(password); //Required Hashing DLL
+
+        data.users.Add(new User { username = username, passwordHash= hash, score = 0 });
         SaveData(data);
         return true;
         //intialize the user into the database
