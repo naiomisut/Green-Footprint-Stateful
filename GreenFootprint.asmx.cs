@@ -9,17 +9,17 @@ public class GreenFootprintService: WebService
     string filePath;
 
     public GreenFootprintService()
-    {
+    {    // go through the user database as needed
         filePath = Context.Server.MapPath("~/App_Data/users.json");
     }
 
-    public class User
+    public class User // keep track of individuals
     {
         public string username { get; set; }
         public int score { get; set; }
     }
 
-    public class UserList
+    public class UserList // keep track of total users in a list
     {
         public List<User> users { get; set; } = new List<User>();
     }
@@ -32,6 +32,7 @@ public class GreenFootprintService: WebService
         string json = File.ReadAllText(filePath);
         JavaScriptSerializer js = new JavaScriptSerializer();
         return js.Deserialize<UserList>(json);
+        // get the list of the users
     }
 
     private void SaveData(UserList data)
@@ -39,6 +40,7 @@ public class GreenFootprintService: WebService
         JavaScriptSerializer js = new JavaScriptSerializer();
         string json = js.Serialize(data);
         File.WriteAllText(filePath, json);
+        // update the data to the database
     }
 
     [WebMethod]
@@ -55,6 +57,7 @@ public class GreenFootprintService: WebService
         data.users.Add(new User { username = username, score = 0 });
         SaveData(data);
         return true;
+        //intialize the user into the database
     }
 
     [WebMethod]
@@ -71,7 +74,7 @@ public class GreenFootprintService: WebService
                 return u.score;
             }
         }
-
+        // could not find the user, return -1
         return -1;
     }
 
@@ -82,18 +85,23 @@ public class GreenFootprintService: WebService
 
         foreach (var u in data.users)
         {
-            if (u.score == 0)
+            if (u.username == username)
             {
-                return 0;
-            }
-            else
-            {
-                u.score -= 1;
-                SaveData(data);
-                return u.score;
+                if (u.score <= 1)
+                {
+                    // no negative scores allowed
+                    u.score = 0;
+                    return u.score;
+                }
+                else
+                {
+                    u.score -= 1;
+                    SaveData(data);
+                    return u.score;
+                }
             }
         }
-
+        // could not find the user, return -1
         return -1;
     }
 
@@ -105,9 +113,11 @@ public class GreenFootprintService: WebService
         foreach (var u in data.users)
         {
             if (u.username == username)
+            {
                 return u.score;
+            }
         }
-
+        // could not find the user, return -1
         return -1;
     }
 
@@ -117,9 +127,9 @@ public class GreenFootprintService: WebService
         int score = GetFootprintScore(username);
 
         if (score < 0) return "User not found";
-        if (score <= 25) return "Sapling";
-        if (score <= 50) return "Sprout";
-        if (score <= 75) return "Plant";
-        return "Tree";
+        else if (score > 0 && score <= 25) return "Sapling";
+        else if (score > 25 && score <= 50) return "Sprout";
+        else if (score > 50 && score <= 75) return "Plant";
+        else return "Tree";
     }
 }
