@@ -17,6 +17,7 @@ public class GreenFootprintService: WebService
     {
         public string username { get; set; }
         public int score { get; set; }
+        public string passwordHash{ get; set; }//Required Hashing DLL
     }
 
     public class UserList // keep track of total users in a list
