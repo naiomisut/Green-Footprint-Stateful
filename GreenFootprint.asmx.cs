@@ -82,7 +82,11 @@ public class GreenFootprintService: WebService
 
         foreach (var u in data.users)
         {
-            if (u.username == username)
+            if (u.score == 0)
+            {
+                return 0;
+            }
+            else
             {
                 u.score -= 1;
                 SaveData(data);
