@@ -212,8 +212,8 @@ Session state is cleared on session end. `users.json` survives application resta
 
 | Team Member | Components Developed | Contribution |
 |---|---|---|
-| **Person A (Pink)** | Default.aspx UI layout, GreenFootprint.asmx service, HashPassword DLL, Global.asax, Session State, users.json data layer | 50% |
-| **Person B (Purple)** | Weather WSDL service integration, Soil Data RESTful service integration, output formatting and error handling | 50% |
+| **Person Naiomi (Pink)** | Default.aspx UI layout, GreenFootprint.asmx service, HashPassword DLL, Global.asax, Session State, users.json data layer | 50% |
+| **Person Mckaela (Purple)** | Weather WSDL service integration, Soil Data RESTful service integration, output formatting and error handling | 50% |
 
 ---
 
