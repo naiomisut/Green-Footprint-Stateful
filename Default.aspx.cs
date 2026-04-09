@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.UI;
+using System.Xml;
 
 namespace YourNamespace
 {
@@ -18,7 +19,12 @@ namespace YourNamespace
         {
             string username = txtRegUsername.Text.Trim();
             bool ok = gfService.RegisterUser(username);
-            lblRegisterResult.Text = ok ? "User registered." : "User already exists or error.";
+            lblRegisterResult.Text = ok ? "User registered." : "User already exists error.";
+
+            if (ok)
+            {
+                XmlBinaryReaderSession["Username"] = username;
+            }
         }
 
         protected void btnLogGreen_Click(object sender, EventArgs e)
