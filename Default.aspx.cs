@@ -66,10 +66,10 @@ namespace YourNamespace
             try
             {
                 // Create a client object to talk to the SOAP weather service
-                WeatherService.ndfdXMLPortTypeCLient client = new WeatherService.ndfdXMLPortTypeClient();
+                WeatherService.ndfdXMLPortTypeClient client = new WeatherService.ndfdXMLPortTypeClient();
 
                 // Call the service method using the zipcode; should return data from the weather API
-                var = result = client.LatLonListZipCode(zip);
+                var result = client.LatLonListZipCode(zip);
 
                 // Display the result in the textbox
                 txtWeatherOutput.Text = "Zip: " + zip + "\n" + "Weather Service Response:\n" + result;
@@ -83,7 +83,7 @@ namespace YourNamespace
 
         // Soil Data Service – for now, just echo the URL and input so it compiles
 
-        protected void btnGetSoil_Click(object sender, EventArgs e)
+        protected async void btnGetSoil_Click(object sender, EventArgs e)
         {
             // Get user input (our query)
             string query = txtSoilQuery.Text.Trim();
@@ -92,25 +92,27 @@ namespace YourNamespace
             //    "Calling: https://sdmdataaccess.nrcs.usda.gov/\n" +
             //    "Input query: " + query + "\n" +
             //    "Expected Output";
-
             try
             {
-                // Need to create an HTTP client to call the REST API
-                string url = "https://sdmdataaccess.nrcs.usda.gov/Tabular/post.rest";
+                using (var client = new System.Net.Http.HttpClient())
+                {
+                    // Need to create an HTTP client to call the REST API
+                    string url = "https://sdmdataaccess.nrcs.usda.gov/Tabular/post.rest";
 
-                // Query must convert to HTTP content (need to send to API)
-                var content = new System.Net.Http.StringContent(query);
+                    // Query must convert to HTTP content (need to send to API)
+                    var content = new System.Net.Http.StringContent(query);
 
-                // Then send a POST request to the API
-                var response = await client.PostAsync(url, content);
+                    // Then send a POST request to the API
+                    var response = await client.PostAsync(url, content);
 
-                // Next READ the response returned from the API
-                string result = await response.Content.ReadAsStringAsync();
+                    // Next READ the response returned from the API
+                    string result = await response.Content.ReadAsStringAsync();
 
-                // Lastly DISPLAY the result
-                txt.SoilOutput.Text = "QueryL " + query + "\n\n" + "Soil Data Response:\n" + result;
+                    // Lastly DISPLAY the result
+                    txtSoilOutput.Text = "Query: " + query + "\n\n" + "Soil Data Response:\n" + result;
+                }
             }
-            catch
+            catch (Exception ex)
             {
                 //Handle errors safely
                 txtSoilOutput.Text = "Error: " + ex.Message;
