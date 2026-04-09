@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Web.UI;
+using System.Xml;
 
 namespace YourNamespace
 {
@@ -12,13 +14,27 @@ namespace YourNamespace
             //update as needed
         }
 
+        private String EmojiState(int score)
+        {
+            if (score < 0) return "User not found";
+            else if (score > 0 && score <= 25) return "🌱 Sapling";
+            else if (score > 25 && score <= 50) return "🌿 Sprout";
+            else if (score > 50 && score <= 75) return "🪴 Plant";
+            else return "🌳 Tree";
+        }
+
         // GreenFootprint
 
         protected void btnRegister_Click(object sender, EventArgs e)
         {
             string username = txtRegUsername.Text.Trim();
             bool ok = gfService.RegisterUser(username);
-            lblRegisterResult.Text = ok ? "User registered." : "User already exists or error.";
+            lblRegisterResult.Text = ok ? "User registered." : "User already exists error.";
+
+            if (ok)
+            {
+                XmlBinaryReaderSession["Username"] = username;
+            }
         }
 
         protected void btnLogGreen_Click(object sender, EventArgs e)
@@ -26,7 +42,14 @@ namespace YourNamespace
             string username = txtGreenUsername.Text.Trim();
             string action = txtGreenAction.Text.Trim();
             int score = gfService.LogGreenAction(username, action);
-            lblGreenResult.Text = "Returned score: " + score;
+            string state = gfService.GetGreenState(username);
+            lblGreenResult.Text = $"Score {score} | State: {Emojistate}";
+
+            //updates to cookies
+            Session["Username"] = username;
+            Session["Score"] = score;
+            Session["State"] = state;
+
         }
 
         protected void btnLogNonGreen_Click(object sender, EventArgs e)
@@ -34,7 +57,13 @@ namespace YourNamespace
             string username = txtNonGreenUsername.Text.Trim();
             string action = txtNonGreenAction.Text.Trim();
             int score = gfService.LogNonGreenAction(username, action);
-            lblNonGreenResult.Text = "Returned score: " + score;
+            string state = gfService.GetGreenState(username);
+            lblNonGreenResult.Text = $"Score {score} | State: {Emojistate}";
+
+            //updates to cookies
+            Session["Username"] = username;
+            Session["Score"] = score;
+            Session["State"] = state;
         }
 
         protected void btnGetScore_Click(object sender, EventArgs e)
@@ -42,6 +71,7 @@ namespace YourNamespace
             string username = txtScoreUsername.Text.Trim();
             int score = gfService.GetFootprintScore(username);
             lblScoreResult.Text = "Score: " + score;
+            Session["Score"] = score;
         }
 
         protected void btnGetState_Click(object sender, EventArgs e)
@@ -49,6 +79,7 @@ namespace YourNamespace
             string username = txtStateUsername.Text.Trim();
             string state = gfService.GetGreenState(username);
             lblStateResult.Text = "State: " + state;
+            Session["State"] = state;
         }
 
         // Weather Service – for now, just echo the URL and input so it compiles
@@ -74,7 +105,7 @@ namespace YourNamespace
                 // Display the result in the textbox
                 txtWeatherOutput.Text = "Zip: " + zip + "\n" + "Weather Service Response:\n" + result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // When something foes wrong we catch it and throw an error instead of crashing
                 txtWeatherOutput.Text = "Error" + ex.Message;
@@ -117,7 +148,7 @@ namespace YourNamespace
                 //Handle errors safely
                 txtSoilOutput.Text = "Error: " + ex.Message;
             }
-            
+
         }
     }
 }
