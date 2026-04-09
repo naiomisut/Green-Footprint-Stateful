@@ -14,6 +14,15 @@ namespace YourNamespace
             //update as needed
         }
 
+        private String EmojiState(int score)
+        {
+            if (score < 0) return "User not found";
+            else if (score > 0 && score <= 25) return "🌱 Sapling";
+            else if (score > 25 && score <= 50) return "🌿 Sprout";
+            else if (score > 50 && score <= 75) return "🪴 Plant";
+            else return "🌳 Tree";
+        }
+
         // GreenFootprint
 
         protected void btnRegister_Click(object sender, EventArgs e)
@@ -34,7 +43,7 @@ namespace YourNamespace
             string action = txtGreenAction.Text.Trim();
             int score = gfService.LogGreenAction(username, action);
             string state = gfService.GetGreenState(username);
-            lblGreenResult.Text = $"Score {score} | State: {state}";
+            lblGreenResult.Text = $"Score {score} | State: {Emojistate}";
 
             //updates to cookies
             Session["Username"] = username;
@@ -49,7 +58,7 @@ namespace YourNamespace
             string action = txtNonGreenAction.Text.Trim();
             int score = gfService.LogNonGreenAction(username, action);
             string state = gfService.GetGreenState(username);
-            lblNonGreenResult.Text = $"Score {score} | State: {state}";
+            lblNonGreenResult.Text = $"Score {score} | State: {Emojistate}";
 
             //updates to cookies
             Session["Username"] = username;
@@ -96,7 +105,7 @@ namespace YourNamespace
                 // Display the result in the textbox
                 txtWeatherOutput.Text = "Zip: " + zip + "\n" + "Weather Service Response:\n" + result;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // When something foes wrong we catch it and throw an error instead of crashing
                 txtWeatherOutput.Text = "Error" + ex.Message;
@@ -137,7 +146,7 @@ namespace YourNamespace
                 //Handle errors safely
                 txtSoilOutput.Text = "Error: " + ex.Message;
             }
-            
+
         }
     }
 }
