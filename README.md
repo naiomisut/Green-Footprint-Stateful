@@ -217,19 +217,7 @@ Session state is cleared on session end. `users.json` survives application resta
 
 ---
 
-## 9. Sprint Plan Summary
-
-| Day | Person A (Pink) | Person B (Purple) |
-|-----|----------------|-------------------|
-| **Monday** | Rename Default.aspx, build UI layout, create Global.asax, write app description | Set up Weather (WSDL) and Soil (REST) services |
-| **Tuesday** | Build GreenFootprint.asmx, implement users.json, create hashing DLL | Complete Weather + Soil integrations |
-| **Wednesday** | Connect Green service to UI, add Session state, display score levels | Connect Weather + Soil to UI |
-| **Thursday** | Validate hashing, JSON updates, UI; add comments | Handle invalid inputs, test API reliability |
-| **Friday** | Finalize UI, ensure all TryIt sections visible | Clean service code, remove debug logs |
-
----
-
-## 10. Server Deployment
+## 9. Server Deployment
 
 - `GreenFootprint.asmx` is deployed to **WebStrar** server for remote testing
 - Full application deployment to WebStrar is planned for **Assignment 6**
