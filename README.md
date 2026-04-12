@@ -122,9 +122,9 @@ Assignment 5/
 ├── Web.config
 ├── Web.Debug.config
 ├── Web.Release.config
-├── WebForm1.aspx                   ← Default.aspx (main application page)
-├── WebForm1.aspx.cs                ← Code-behind
-└── WebForm1.aspx.designer.cs
+├── Default.aspx                   ← Default.aspx (main application page)
+├── Default.aspx.cs                ← Code-behind
+└── Default.aspx.designer.cs
 ```
 
 ---
