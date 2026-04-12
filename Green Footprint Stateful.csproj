@@ -67,7 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="WebForm1.aspx" />
+    <Content Include="Default.aspx" />
     <None Include="App_Data\users.json" />
     <Content Include="Web.config" />
     <Content Include="GreenFootprint.asmx" />
@@ -78,12 +78,12 @@
       <DependentUpon>GreenFootprint.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Deafult.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Deefault.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
