@@ -11,7 +11,7 @@ namespace Green_Footprint_Stateful
 {
 
 
-    public partial class WebForm1
+    public partial class Default
     {
 
         /// <summary>
