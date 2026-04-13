@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ServicesTryIt.aspx.cs"
-    Inherits="YourNamespace.ServicesTryIt" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs"
+    Inherits="YourNamespace.Deafult" %>
 
 <!DOCTYPE html>
 <html>
