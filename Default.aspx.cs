@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace YourNamespace
 {
-    public partial class ServicesTryIt : Page
+    public partial class Default : System.Web.UI.Page
     {
         GreenFootprintService gfService = new GreenFootprintService();
 
