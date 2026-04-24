@@ -11,7 +11,20 @@ namespace YourNamespace
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //update as needed
+            if (!IsPostBack)
+            {
+                GenerateCaptcha();
+                imgCaptcha.ImageUrl = "CaptchaImage.aspx?code=" + DateTime.Now.Ticks; // Unique URL to prevent caching  
+            }
+        }
+
+        private void GenerateCaptcha()
+        {
+            // Generate a random number between 1000 and 9999
+            Random rand = new Random();
+            string code = rand.Next(1000, 9999).ToString();
+            // Store the code in the session for later validation
+            Session["CaptchaCode"] = code;
         }
 
         private String EmojiState(int score)
@@ -29,9 +42,17 @@ namespace YourNamespace
         {
             string username = txtRegUsername.Text.Trim();
             string password = txtRegPassword.Text.Trim();
+            string enteredCaptcha = txtCaptcha.Text.Trim();
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 lblRegResult.Text = "Username and password are required.";
+                return;
+            }
+            if (Session["CaptchaCode"] == null || enteredCaptcha != Session["CaptchaCode"].ToString())
+            {
+                lblRegResult.Text = "Incorrect CAPTCHA. Please try again.";
+                GenerateCaptcha(); // Regenerate CAPTCHA for next attempt
+                imgCaptcha.ImageUrl = "CaptchaImage.aspx?code=" + DateTime.Now.Ticks; // Refresh image
                 return;
             }
             bool ok = gfService.RegisterUser(username, password);
@@ -40,7 +61,12 @@ namespace YourNamespace
             {
                 FormsAuthentication.SetAuthCookie(username, false);
                 Session["Username"] = username;
-                WebResponse.Redirect("MemberAccessException.aspx");
+                Response.Redirect("Member.aspx");
+            }
+            else
+            {
+                GenerateCaptcha(); // Regenerate CAPTCHA for next attempt
+                imgCaptcha.ImageUrl = "CaptchaImage.aspx?code=" + DateTime.Now.Ticks; // Refresh image
             }
         }
 
