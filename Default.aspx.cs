@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
+using System.Security.Permissions;
 using System.Web.UI;
-using System.Xml;
-
 namespace YourNamespace
 {
     public partial class Default : System.Web.UI.Page
@@ -28,12 +26,17 @@ namespace YourNamespace
         protected void btnRegister_Click(object sender, EventArgs e)
         {
             string username = txtRegUsername.Text.Trim();
-            bool ok = gfService.RegisterUser(username);
-            lblRegisterResult.Text = ok ? "User registered." : "User already exists error.";
-
+            string password = txtRegPassword.Text.Trim();
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                lblRegResult.Text = "Username and password are required.";
+                return;
+            }
+            bool ok = gfService.RegisterUser(username, password);
+            lblRegResult.Text = ok ? "Registration successful!" : "Username already exists.";
             if (ok)
             {
-                XmlBinaryReaderSession["Username"] = username;
+                Session["Username"] = username;
             }
         }
 
