@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<members>
+    <member>
+        <username>alice</username>
+        <passwordHash>ABC123HASHVALUE</passwordhash>
+        <score>0<score>
+        <state>sapling<state>
+    </member>
+</members>
