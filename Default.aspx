@@ -40,6 +40,17 @@
     Result:
     <asp:Label ID="lblRegisterResult" runat="server" />
 
+    <h3>Login</h3>
+    Username:
+    <asp:TextBox ID="txtLoginUsername" runat="server" />
+    Password:
+    <asp:TextBox ID="txtLoginPassword" runat="server" TextMode="Password" />
+    <asp:Button ID="btnLogin" runat="server" Text="Login"
+        OnClick="btnLogin_Click" />
+    Result:
+    <asp:Label ID="lblLoginResult" runat="server" />
+    <hr />
+    
     <h3>LogGreenAction</h3>
     Username:
     <asp:TextBox ID="txtGreenUsername" runat="server" />
