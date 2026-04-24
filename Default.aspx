@@ -32,14 +32,25 @@
 
     <h3>RegisterUser</h3>
     Username:
-    <asp:TextBox ID="txtRegUsername" runat="server" />
+    <asp:TextBox ID="txtRegisterUsername" runat="server" />
+    <br />
     Password:
-    <asp:TextBox ID="txtRegPassword" runat="server" TextMode="Password" />
-    <asp:Button ID="btnRegister" runat="server" Text="Invoke RegisterUser"
-    OnClick="btnRegister_Click" />
-    Result:
+    <asp:TextBox ID="txtRegisterPassword" runat="server" TextMode="Password" />
+    <br />
+    Captcha:
+    <br />
+    <asp:Image ID="imgCaptcha" runat="server" ImageURL="CaptchaImage.ashx"/>
+    <br />
+    Enter Captcha:
+    <asp:TextBox ID="txtCaptcha" runat="server" />
+    <asp:Label ID="lblCaptchaResult" runat="server" ForeColor="Red" />
+    <br />
+    <asp:Button ID="btnRegister" runat="server" Text="Register"
+        OnClick="btnRegister_Click" />
+    Result
     <asp:Label ID="lblRegResult" runat="server" />
-
+    <hr />
+    
     <h3>Login</h3>
     Username:
     <asp:TextBox ID="txtLoginUsername" runat="server" />
