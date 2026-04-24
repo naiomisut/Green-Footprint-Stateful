@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs"
-    Inherits="YourNamespace.Deafult" %>
+    Inherits="GreenFootprintStateful.Deafult" %>
 
 <!DOCTYPE html>
 <html>
