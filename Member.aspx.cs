@@ -9,7 +9,7 @@ namespace YourNamespace
         {
             if (!User.Identity.IsAuthenticated)
             {
-                Response.Redirect("Login.aspx");
+                Response.Redirect("Default.aspx");
             }
             else
             {
