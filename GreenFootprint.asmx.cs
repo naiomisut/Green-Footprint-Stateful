@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Remoting.Contexts;
+﻿using System.IO;
 using System.Web.Services;
 using System.Xml.Linq;
 
-public class GreenFootprintService: WebService
+public class GreenFootprintService : WebService
 {
     string filePath;
 
@@ -22,7 +20,7 @@ public class GreenFootprintService: WebService
             newDoc.Save(filePath);
             return newDoc;
         }
-         // get the list of the users
+        // get the list of the users
         return XDocument.Load(filePath);
     }
 
@@ -82,7 +80,7 @@ public class GreenFootprintService: WebService
                 int score = (int)user.Element("score");
                 score += 1; // each green action adds 1 point
                 user.Element("score").Value = score.ToString();
-                user.Element("state").Value = GetGreenState(score); // update the state based on the new score
+                user.Element("state").Value = GetGreenStateFromScore(score); // update the state based on the new score
                 SaveData(data);
                 return score;
             }
@@ -94,8 +92,6 @@ public class GreenFootprintService: WebService
     [WebMethod]
     public int LogNonGreenAction(string username, string action)
     {
-        var data = LoadData();
-
         var data = LoadData();
 
         foreach (var user in data.Root.Elements("member"))
@@ -112,7 +108,7 @@ public class GreenFootprintService: WebService
                     score -= 1; // each non-green action subtracts 1 point
                 }
                 user.Element("score").Value = score.ToString();
-                user.Element("state").Value = GetGreenState(score); // update the state based on the new score
+                user.Element("state").Value = GetGreenStateFromScore(score); // update the state based on the new score
                 SaveData(data);
                 return score;
             }
@@ -143,9 +139,17 @@ public class GreenFootprintService: WebService
         int score = GetFootprintScore(username);
 
         if (score < 0) return "User not found";
-        else if (score > 0 && score <= 25) return "Sapling";
+        else
+        {
+            return GetGreenStateFromScore(score);
+        }
+    }
+    
+    private string GetGreenStateFromScore(int score)
+    {
+        if (score >= 0 && score <= 25) return "Sapling";
         else if (score > 25 && score <= 50) return "Sprout";
         else if (score > 50 && score <= 75) return "Plant";
-        else return "Tree";
+        else if (score > 75) return "Tree";
     }
 }
