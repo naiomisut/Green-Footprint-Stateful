@@ -150,6 +150,6 @@ public class GreenFootprintService : WebService
         if (score >= 0 && score <= 25) return "Sapling";
         else if (score > 25 && score <= 50) return "Sprout";
         else if (score > 50 && score <= 75) return "Plant";
-        else if (score > 75) return "Tree";
+        else return "Tree";
     }
 }
