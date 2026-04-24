@@ -23,7 +23,7 @@
     </p>
 
     <ul>
-        <li>RegisterUser(string username) : bool</li>
+        <li>RegisterUser(string username, string password) : bool</li>
         <li>LogGreenAction(string username, string action) : int</li>
         <li>LogNonGreenAction(string username, string action) : int</li>
         <li>GetFootprintScore(string username) : int</li>
@@ -33,10 +33,12 @@
     <h3>RegisterUser</h3>
     Username:
     <asp:TextBox ID="txtRegUsername" runat="server" />
+    Password:
+    <asp:TextBox ID="txtRegPassword" runat="server" TextMode="Password" />
     <asp:Button ID="btnRegister" runat="server" Text="Invoke RegisterUser"
-        OnClick="btnRegister_Click" />
-    Result: <asp:Label ID="lblRegisterResult" runat="server" />
-    <hr />
+    OnClick="btnRegister_Click" />
+    Result:
+    <asp:Label ID="lblRegisterResult" runat="server" />
 
     <h3>LogGreenAction</h3>
     Username:
