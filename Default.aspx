@@ -38,7 +38,7 @@
     <asp:Button ID="btnRegister" runat="server" Text="Invoke RegisterUser"
     OnClick="btnRegister_Click" />
     Result:
-    <asp:Label ID="lblRegisterResult" runat="server" />
+    <asp:Label ID="lblRegResult" runat="server" />
 
     <h3>Login</h3>
     Username:
@@ -50,7 +50,7 @@
     Result:
     <asp:Label ID="lblLoginResult" runat="server" />
     <hr />
-    
+
     <h3>LogGreenAction</h3>
     Username:
     <asp:TextBox ID="txtGreenUsername" runat="server" />
