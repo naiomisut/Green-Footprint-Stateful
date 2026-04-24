@@ -8,7 +8,7 @@ public class GreenFootprintService : WebService
 
     public GreenFootprintService()
     {    // go through the user database as needed
-        filePath = Context.Server.MapPath("~/Member.xml");
+        filePath = Context.Server.MapPath("~/App_Data/Member.xml");
     }
 
     private XDocument LoadData()

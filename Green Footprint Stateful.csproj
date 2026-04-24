@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
-    <None Include="Member.xml" />
+    <None Include="App_Data\Member.xml" />
     <Content Include="Web.config" />
     <Content Include="GreenFootprint.asmx" />
   </ItemGroup>
