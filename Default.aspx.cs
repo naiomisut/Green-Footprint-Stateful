@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Security.Permissions;
 using System.Web.UI;
+using System.Web.Security;
+using System.Net;
 namespace YourNamespace
 {
     public partial class Default : System.Web.UI.Page
@@ -36,7 +38,31 @@ namespace YourNamespace
             lblRegResult.Text = ok ? "Registration successful!" : "Username already exists.";
             if (ok)
             {
+                FormsAuthentication.SetAuthCookie(username, false);
                 Session["Username"] = username;
+                WebResponse.Redirect("MemberAccessException.aspx");
+            }
+        }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            string username = txt.LoginUsername.Text.Trim();
+            string password = txt.LoginPassword.Text.Trim();
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                lblLoginResult.Text = "Username and password are required.";
+                return;
+            }
+            bool valid = gfService.ValidateUser(username, password);
+            if (valid)
+            {
+                FormsAuthentication.SetAuthCookie(username, false);
+                Session["Username"] = username;
+                WebResponse.Redirecr(MemberAccessException.aspx);
+            }
+            else
+            {
+                lblLoginResult.Text = "Invalid username or password.";
             }
         }
 
