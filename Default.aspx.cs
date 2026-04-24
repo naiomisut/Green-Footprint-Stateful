@@ -14,7 +14,7 @@ namespace YourNamespace
             if (!IsPostBack)
             {
                 GenerateCaptcha();
-                imgCaptcha.ImageUrl = "CaptchaImage.aspx?code=" + DateTime.Now.Ticks; // Unique URL to prevent caching  
+                imgCaptcha.ImageUrl = "CaptchaImage.aspx?tse=" + DateTime.Now.Ticks; // Unique URL to prevent caching  
             }
         }
 
@@ -25,6 +25,13 @@ namespace YourNamespace
             string code = rand.Next(1000, 9999).ToString();
             // Store the code in the session for later validation
             Session["CaptchaCode"] = code;
+        }
+
+        protected void btnRefreshCaptcha_Click(object sender, EventArgs e)
+        {
+            GenerateCaptcha();
+            imgCaptcha.ImageUrl = "CaptchaImage.aspx?ts=" + DateTime.Now.Ticks; // Refresh image with unique URL
+            lblRegResult.Text = ""; // Clear any previous messages
         }
 
         private String EmojiState(int score)
@@ -52,7 +59,7 @@ namespace YourNamespace
             {
                 lblRegResult.Text = "Incorrect CAPTCHA. Please try again.";
                 GenerateCaptcha(); // Regenerate CAPTCHA for next attempt
-                imgCaptcha.ImageUrl = "CaptchaImage.aspx?code=" + DateTime.Now.Ticks; // Refresh image
+                imgCaptcha.ImageUrl = "CaptchaImage.aspx?ts=" + DateTime.Now.Ticks; // Refresh image
                 return;
             }
             bool ok = gfService.RegisterUser(username, password);
@@ -72,8 +79,8 @@ namespace YourNamespace
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = txt.LoginUsername.Text.Trim();
-            string password = txt.LoginPassword.Text.Trim();
+            string username = txtLoginUsername.Text.Trim();
+            string password = txtLoginPassword.Text.Trim();
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 lblLoginResult.Text = "Username and password are required.";
@@ -84,7 +91,7 @@ namespace YourNamespace
             {
                 FormsAuthentication.SetAuthCookie(username, false);
                 Session["Username"] = username;
-                WebResponse.Redirecr(MemberAccessException.aspx);
+                Response.Redirect(Member.aspx);
             }
             else
             {
@@ -98,7 +105,7 @@ namespace YourNamespace
             string action = txtGreenAction.Text.Trim();
             int score = gfService.LogGreenAction(username, action);
             string state = gfService.GetGreenState(username);
-            lblGreenResult.Text = $"Score {score} | State: {Emojistate}";
+            lblGreenResult.Text = $"Score {score} | State: {Emojistate(score)}";
 
             //updates to cookies
             Session["Username"] = username;
@@ -113,7 +120,7 @@ namespace YourNamespace
             string action = txtNonGreenAction.Text.Trim();
             int score = gfService.LogNonGreenAction(username, action);
             string state = gfService.GetGreenState(username);
-            lblNonGreenResult.Text = $"Score {score} | State: {Emojistate}";
+            lblNonGreenResult.Text = $"Score {score} | State: {Emojistate(score)}";
 
             //updates to cookies
             Session["Username"] = username;
