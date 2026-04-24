@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Remoting.Contexts;
-using System.Web.Script.Serialization;
 using System.Web.Services;
+using System.Xml.Linq;
 
 public class GreenFootprintService: WebService
 {
@@ -10,59 +10,64 @@ public class GreenFootprintService: WebService
 
     public GreenFootprintService()
     {    // go through the user database as needed
-        filePath = Context.Server.MapPath("~/App_Data/users.json");
+        filePath = Context.Server.MapPath("~/Member.xml");
     }
 
-    public class User // keep track of individuals
-    {
-        public string username { get; set; }
-        public int score { get; set; }
-        public string passwordHash{ get; set; }//Required Hashing DLL
-    }
-
-    public class UserList // keep track of total users in a list
-    {
-        public List<User> users { get; set; } = new List<User>();
-    }
-
-    private UserList LoadData()
+    private XDocument LoadData()
     {
         if (!File.Exists(filePath))
-            return new UserList();
-
-        string json = File.ReadAllText(filePath);
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        return js.Deserialize<UserList>(json);
-        // get the list of the users
+        {
+            // create a new XML file with root element if it doesn't exist
+            XDocument newDoc = new XDocument(new XElement("members"));
+            newDoc.Save(filePath);
+            return newDoc;
+        }
+         // get the list of the users
+        return XDocument.Load(filePath);
     }
 
-    private void SaveData(UserList data)
+    private void SaveData(XDocument data)
     {
-        JavaScriptSerializer js = new JavaScriptSerializer();
-        string json = js.Serialize(data);
-        File.WriteAllText(filePath, json);
         // update the data to the database
+        data.Save(filePath);
     }
 
     [WebMethod]
-    public bool RegisterUser(string username)
+    public bool RegisterUser(string username, string password)
     {
         var data = LoadData();
-
-        foreach (var u in data.users)
+        foreach (var user in data.Root.Elements("member"))
         {
-            if (u.username == username)
+            if (user.Element("username").Value == username)
             {
                 return false;
             }
         }
-
         string hash = HashGen.MakeHash(password); //Required Hashing DLL
-
-        data.users.Add(new User { username = username, passwordHash= hash, score = 0 });
+        data.Root.Add(new XElement("member",
+            new XElement("username", username),
+            new XElement("passwordHash", hash),
+            new XElement("score", 0),
+            new XElement("state", "Sapling")
+            )
+        );
         SaveData(data);
         return true;
-        //intialize the user into the database
+    }
+
+    [WebMethod]
+    public bool ValidateUser(string username, string password)
+    {
+        var data = LoadData();
+        string hash = HashGen.MakeHash(password); //Required Hashing DLL
+        foreach (var user in data.Root.Elements("member"))
+        {
+            if (user.Element("username").Value == username && user.Element("passwordHash").Value == hash)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     [WebMethod]
@@ -70,13 +75,16 @@ public class GreenFootprintService: WebService
     {
         var data = LoadData();
 
-        foreach (var u in data.users)
+        foreach (var user in data.Root.Elements("member"))
         {
-            if (u.username == username)
+            if ((string)user.Element("username") == username)
             {
-                u.score += 1;
+                int score = (int)user.Element("score");
+                score += 1; // each green action adds 1 point
+                user.Element("score").Value = score.ToString();
+                user.Element("state").Value = GetGreenState(score); // update the state based on the new score
                 SaveData(data);
-                return u.score;
+                return score;
             }
         }
         // could not find the user, return -1
@@ -88,22 +96,25 @@ public class GreenFootprintService: WebService
     {
         var data = LoadData();
 
-        foreach (var u in data.users)
+        var data = LoadData();
+
+        foreach (var user in data.Root.Elements("member"))
         {
-            if (u.username == username)
+            if ((string)user.Element("username") == username)
             {
-                if (u.score <= 1)
+                int score = (int)user.Element("score");
+                if (score <= 1)
                 {
-                    // no negative scores allowed
-                    u.score = 0;
-                    return u.score;
+                    score = 0; // prevent negative scores
                 }
                 else
                 {
-                    u.score -= 1;
-                    SaveData(data);
-                    return u.score;
+                    score -= 1; // each non-green action subtracts 1 point
                 }
+                user.Element("score").Value = score.ToString();
+                user.Element("state").Value = GetGreenState(score); // update the state based on the new score
+                SaveData(data);
+                return score;
             }
         }
         // could not find the user, return -1
@@ -115,11 +126,11 @@ public class GreenFootprintService: WebService
     {
         var data = LoadData();
 
-        foreach (var u in data.users)
+        foreach (var user in data.Root.Elements("member"))
         {
-            if (u.username == username)
+            if ((string)user.Element("username") == username)
             {
-                return u.score;
+                return (int)user.Element("score");
             }
         }
         // could not find the user, return -1
