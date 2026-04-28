@@ -154,22 +154,26 @@
     <asp:TextBox ID="txtSoilOutput" runat="server"
         TextMode="MultiLine" Rows="6" Columns="60" />
 
-    <!-- Staff Login -->
+    <!-- Staff Login Section -->
     <p>
         Staff Login
     </p>
 
     <h3> Staff Login </h3>
 
+    <!-- Textbox for staff username input -->
     <asp:Textbox ID="txtStaffUser" runat="server" Placeholder="Username"></asp:Textbox>
     <br />
 
+    <!-- Textbox for staff password input with hidden characters -->
     <asp:Textbox ID="txtStaffPass" runat="server" TextMode="Password" Placeholder="Password"></asp:Textbox>
     <br />
 
+    <!-- Button that is used for staff login event -->
     <asp:Button ID="btnStaffLogin" runat="server" Text="Login" OnClick="btnStaffLogin_Check" />
     <br />
 
+    <!-- Label that is used to display the login success or error message -->
     <asp:Label ID="lblStaffResult" runat="server" Text=""></asp:Label>
 
 </form>
