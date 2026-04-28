@@ -57,3 +57,11 @@ C:\Users\Naiomi\Documents\Visual Studio 2022\CSE445\Green Footprint Stateful\obj
 C:\Users\Naiomi\Documents\Visual Studio 2022\CSE445\Green Footprint Stateful\obj\Debug\Green Fo.410ED93C.Up2Date
 C:\Users\Naiomi\Documents\Visual Studio 2022\CSE445\Green Footprint Stateful\obj\Debug\Green Footprint Stateful.dll
 C:\Users\Naiomi\Documents\Visual Studio 2022\CSE445\Green Footprint Stateful\obj\Debug\Green Footprint Stateful.pdb
+C:\Users\mcfad\OneDrive\Desktop\New folder\Green-Footprint-Stateful\obj\Debug\Green Footprint Stateful.csproj.AssemblyReference.cache
+C:\Users\mcfad\OneDrive\Desktop\New folder\Green-Footprint-Stateful\obj\Debug\Green Footprint Stateful.csproj.CoreCompileInputs.cache
+C:\Users\mcfad\OneDrive\Desktop\New folder\Green-Footprint-Stateful\obj\Debug\Green Footprint Stateful.dll
+C:\Users\mcfad\OneDrive\Desktop\New folder\Green-Footprint-Stateful\obj\Debug\Green Footprint Stateful.pdb
+C:\Users\mcfad\OneDrive\Desktop\CSE445 Assignment 5 Code\Green-Footprint-Stateful\obj\Debug\Green Footprint Stateful.csproj.AssemblyReference.cache
+C:\Users\mcfad\OneDrive\Desktop\CSE445 Assignment 5 Code\Green-Footprint-Stateful\obj\Debug\Green Footprint Stateful.csproj.CoreCompileInputs.cache
+C:\Users\mcfad\OneDrive\Desktop\CSE445 Assignment 5 Code\Green-Footprint-Stateful\obj\Debug\Green Footprint Stateful.dll
+C:\Users\mcfad\OneDrive\Desktop\CSE445 Assignment 5 Code\Green-Footprint-Stateful\obj\Debug\Green Footprint Stateful.pdb
