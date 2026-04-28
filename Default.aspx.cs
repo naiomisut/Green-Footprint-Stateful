@@ -212,5 +212,30 @@ namespace YourNamespace
             }
 
         }
+        
+        // Staff Login
+        protected void btnStaffLogin_Click(object sender, EventArgs e)
+        {
+            // Gets username input from textbox
+            string username = txtStaffUser.Text.Trim();
+
+            // Get password input from textbox
+            string password = txtStaffPass.Text.Trim();
+
+            // Check if credentials match the required staff login
+            if (username = "TA" && password == "Cse445!")
+            {
+                // Saves the role in session so we know this user is staff
+                Session["role"] = "staff";
+
+                // Redirect to the protected staff page
+                Response.Redirect("Staff.aspx");
+            }
+            else
+            {
+                // Show error message if login fails
+                lblStaffResult.Text = "Invalid Staff Login.";
+            }
+        }
     }
 }

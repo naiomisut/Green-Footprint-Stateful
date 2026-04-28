@@ -154,6 +154,24 @@
     <asp:TextBox ID="txtSoilOutput" runat="server"
         TextMode="MultiLine" Rows="6" Columns="60" />
 
+    <!-- Staff Login -->
+    <p>
+        Staff Login
+    </p>
+
+    <h3> Staff Login </h3>
+
+    <asp:Textbox ID="txtStaffUser" runat="server" Placeholder="Username"></asp:Textbox>
+    <br />
+
+    <asp:Textbox ID="txtStaffPass" runat="server" TextMode="Password" Placeholder="Password"></asp:Textbox>
+    <br />
+
+    <asp:Button ID="btnStaffLogin" runat="server" Text="Login" OnClick="btnStaffLogin_Check" />
+    <br />
+
+    <asp:Label ID="lblStaffResult" runat="server" Text=""></asp:Label>
+
 </form>
 </body>
 </html>
